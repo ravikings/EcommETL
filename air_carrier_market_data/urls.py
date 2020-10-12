@@ -11,7 +11,21 @@ from . views import MarketDataList, \
     Top5AirportsDistanceByOrigin, \
     Top5AirportsDistanceByDest, \
     MostPassagerByMonth, \
-    MostFreightByMonth
+    MostFreightByMonth, \
+    MostPassengersCarried, \
+    MostMailCarried, \
+    LongestDistance, \
+    AverPassengerslAXAirport, \
+    AverPassengersSFOAirport, \
+    AverPassengersDFWAirport, \
+    AverPassengersATLAirport, \
+    AverPassengersORDAirport, \
+    AverfreightMIAAirport, \
+    AverFreightMEMAirport, \
+    AverFreightJFKAirport, \
+    AverFreightANCAirport, \
+    AverFreightSDFAirport
+
     
 
 
@@ -84,6 +98,101 @@ urlpatterns = [
              extra_context={'title': "Top Passengers by Month"}
          ),
          name="MostFreightByMonth"),
+
+# URL airline reported the most passengers carried?
+    path('MostPassengersCarried/',
+         MostPassengersCarried.as_view(
+             extra_context={'title': "Most Passenger"}
+         ),
+         name="MostPassengersCarried"),
+
+
+# URL airline reported the most mail carried?
+    path('MostMailCarried/',
+         MostMailCarried.as_view(
+             extra_context={'title': "Most Mail"}
+         ),
+         name="MostMailCarried"),
+
+# URL airline reported the most longest flight distance??
+   path('LongestDistance/',
+         LongestDistance.as_view(
+             extra_context={'title': "Most Mail"}
+         ),
+         name="LongestDistance"),
+
+
+# Find the average number of passengers for flights into: LAX (Los Angeles)
+   path('AverPassengerslAXAirport/',
+         AverPassengerslAXAirport.as_view(
+             extra_context={'title': "average number of passengers into: LAX (Los Angeles) "}
+         ),
+         name="AverPassengerslAXAirport"),
+
+# Find the average number of passengers for flights into: SFO (San Francisco)
+   path('AverPassengersSFOAirport/',
+         AverPassengersSFOAirport.as_view(
+             extra_context={'title': "average number of passengers into: SFO (San Francisco) "}
+         ),
+         name="AverPassengersSFOAirport"),
+
+# Find the average number of passengers for flights into: DFW (Dallas-Fort Worth)
+   path('AverPassengersDFWAirport/',
+         AverPassengersDFWAirport.as_view(
+             extra_context={'title': "average number of passengers into:  DFW (Dallas-Fort Worth) "}
+         ),
+         name="AverPassengersDFWAirport"),
+
+# Find the average number of passengers for flights into: ATL (Atlanta)
+   path('AverPassengersATLAirport/',
+         AverPassengersATLAirport.as_view(
+             extra_context={'title': "average number of passengers into:  ATL (Atlanta)"}
+         ),
+         name="AverPassengersATLAirport"),
+
+# Find the average number of passengers for flights into: ORD (Chicago)
+   path('AverPassengersORDAirport/',
+         AverPassengersORDAirport.as_view(
+             extra_context={'title': "average number of passengers into: ORD (Chicago)"}
+         ),
+         name="AverPassengersORDAirport"),
+
+# URL average volume of freight for flights departing:  MIA (Miami)
+   path('AverfreightMIAAirport/',
+         AverfreightMIAAirport.as_view(
+             extra_context={'title': "average number of freights into: MIA (Miami)"}
+         ),
+         name="AverfreightMIAAirport"),
+
+# URL average volume of freight for flights departing: MEM (Memphis)
+   path('AverFreightMEMAirport/',
+         AverFreightMEMAirport.as_view(
+             extra_context={'title': "average number of freights into: MEM (Memphis)"}
+         ),
+         name="AverFreightMEMAirport"),
+
+# URL Find the average volume of freight for flights departing: JFK (New York JFK)
+  path('AverFreightJFKAirport/',
+         AverFreightJFKAirport.as_view(
+             extra_context={'title': "average number of freights into: JFK (New York JFK)"}
+         ),
+         name="AverFreightJFKAirport"),
+    
+# URL Find the average volume of freight for flights departing: ANC (Anchorage)
+ path('AverFreightANCAirport/',
+         AverFreightANCAirport.as_view(
+             extra_context={'title': "average number of freights into: ANC (Anchorage)"}
+         ),
+         name="AverFreightANCAirport"),
+    
+# Find the average volume of freight for flights departing: SDF (Louisville)
+ path('AverFreightSDFAirport/',
+         AverFreightSDFAirport.as_view(
+             extra_context={'title': "average number of freights into: SDF (Louisville)"}
+         ),
+         name="AverFreightSDFAirport"),
+
+
 
 
     path('topdistance_month/',

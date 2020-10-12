@@ -1,7 +1,7 @@
 # Create your views here.
 import pdb
 from django.views.generic import ListView
-from django.db.models import Max, Sum
+from django.db.models import Avg, Max, Sum
 
 from . models import MarketData
 
@@ -171,9 +171,9 @@ class TopDistanceByMonth(ListView):
 
 
 # Which airline reported the most passengers carried?
-class TopDistanceByMonth(ListView):
+class MostPassengersCarried(ListView):
     context_object_name = "airport_list"
-    template_name="rankorder_list_origin_distance_month.html"
+    template_name="rankorder_most_passenger.html"
 
     def get_queryset(self):
 
@@ -183,7 +183,7 @@ class TopDistanceByMonth(ListView):
 
         # there are six months worth of data
         # not good ultimately as this is a "hard-coded" fore-knowledge of the data
-        for month in range(1,7):
+        for month in range(1,2):
             queryset = MarketData.objects \
                 .values('orig_iata_code',
                         'orig_city_name',
@@ -191,8 +191,8 @@ class TopDistanceByMonth(ListView):
                         'dest_city_name',
                         'month') \
                 .filter(month__exact=month) \
-                .annotate(total_distance=Max('distance')) \
-                .order_by('-total_distance')[0:1]
+                .annotate(total_passengers=Max('passengers')) \
+                .order_by('-total_passengers')[0:1]
             
             # off by one error for assignment
 
@@ -200,3 +200,158 @@ class TopDistanceByMonth(ListView):
 
         # return list
         return month_list
+
+
+# Which airline reported the most mail carried?
+class MostMailCarried(ListView):
+    context_object_name = "airport_list"
+    template_name="rankorder_most_mail.html"
+
+    def get_queryset(self):
+
+        month_list = []
+
+        # pdb.set_trace()
+
+        # there are six months worth of data
+        # not good ultimately as this is a "hard-coded" fore-knowledge of the data
+        for month in range(1,2):
+            queryset = MarketData.objects \
+                .values('orig_iata_code',
+                        'orig_city_name',
+                        'dest_iata_code',
+                        'dest_city_name',
+                        'month') \
+                .filter(month__exact=month) \
+                .annotate(total_mail=Max('mail')) \
+                .order_by('-total_mail')[0:1]
+            
+            # off by one error for assignment
+
+            month_list.append(queryset)
+
+        # return list
+        return month_list
+
+
+# Which airport reported the longest distance by month?
+class LongestDistance(ListView):
+    context_object_name = "airport_list"
+    template_name="LongestDistance_flight.html"
+
+    def get_queryset(self):
+
+        month_list = []
+
+        # pdb.set_trace()
+
+        # there are six months worth of data
+        # not good ultimately as this is a "hard-coded" fore-knowledge of the data
+        for month in range(0,2):
+            queryset = MarketData.objects \
+                .values('orig_iata_code',
+                        'orig_city_name',
+                        'dest_iata_code',
+                        'dest_city_name',
+                        'month') \
+                .filter(month__exact=month) \
+                .annotate(total_dix=Max('distance')) \
+                .order_by('-total_dix')[0:1]
+            
+            # off by one error for assignment
+
+            month_list.append(queryset)
+
+        # return list
+        return month_list
+
+# Find the average number of passengers for flights into: LAX (Los Angeles)
+class AverPassengerslAXAirport(ListView):
+    context_object_name = "airport_list"
+    queryset = MarketData.objects.values('dest_iata_code','dest_city_name') \
+                                 .annotate(total_Pass=Avg('passengers')) \
+                                 .filter(dest_iata_code='LAX') \
+                                 .order_by('-total_Pass')
+    template_name="average_paasenger_by_LAXAirport.html"
+
+# Find the average number of passengers for flights into: SFO (San Francisco)
+class AverPassengersSFOAirport(ListView):
+    context_object_name = "airport_list"
+    queryset = MarketData.objects.values('dest_iata_code','dest_city_name') \
+                                 .annotate(total_Pass=Avg('passengers')) \
+                                 .filter(dest_iata_code='SFO') \
+                                 .order_by('-total_Pass')
+    template_name="average_paasenger_by_SFOAirport.html"
+
+
+ # Find the average number of passengers for flights into: DFW (Dallas-Fort Worth)
+class AverPassengersDFWAirport(ListView):
+    context_object_name = "airport_list"
+    queryset = MarketData.objects.values('dest_iata_code','dest_city_name') \
+                                 .annotate(total_Pass=Avg('passengers')) \
+                                 .filter(dest_iata_code='DFW') \
+                                 .order_by('-total_Pass')
+    template_name="average_paasenger_by_DFWAirport.html"
+
+# Find the average number of passengers for flights into: ATL (Atlanta)
+class AverPassengersATLAirport(ListView):
+    context_object_name = "airport_list"
+    queryset = MarketData.objects.values('dest_iata_code','dest_city_name') \
+                                 .annotate(total_Pass=Avg('passengers')) \
+                                 .filter(dest_iata_code='ATL') \
+                                 .order_by('-total_Pass')
+    template_name="AverPassengersATLAirport.html"
+
+# Find the average number of passengers for flights into: ATL (Atlanta)
+class AverPassengersORDAirport(ListView):
+    context_object_name = "airport_list"
+    queryset = MarketData.objects.values('dest_iata_code','dest_city_name') \
+                                 .annotate(total_Pass=Avg('passengers')) \
+                                 .filter(dest_iata_code='ATL') \
+                                 .order_by('-total_Pass')
+    template_name="AverPassengersORDAirport.html"
+
+# Find the average volume of freight for flights departing:  MIA (Miami)
+class AverfreightMIAAirport(ListView):
+    context_object_name = "airport_list"
+    queryset = MarketData.objects.values('dest_iata_code','dest_city_name') \
+                                 .annotate(total_Pass=Avg('freight')) \
+                                 .filter(dest_iata_code='MIA') \
+                                 .order_by('-total_Pass')
+    template_name="AverfreightMIAAirport.html"
+
+# Find the average volume of freight for flights departing: MEM (Memphis)
+class AverFreightMEMAirport(ListView):
+    context_object_name = "airport_list"
+    queryset = MarketData.objects.values('dest_iata_code','dest_city_name') \
+                                 .annotate(total_Pass=Avg('freight')) \
+                                 .filter(dest_iata_code='MEM') \
+                                 .order_by('-total_Pass')
+    template_name="AverFreightMEMAirport.html"
+
+# Find the average volume of freight for flights departing: JFK (New York JFK)
+class AverFreightJFKAirport(ListView):
+    context_object_name = "airport_list"
+    queryset = MarketData.objects.values('dest_iata_code','dest_city_name') \
+                                 .annotate(total_Pass=Avg('freight')) \
+                                 .filter(dest_iata_code='JFK') \
+                                 .order_by('-total_Pass')
+    template_name="AverFreightJFKAirport.html"
+
+ # Find the average volume of freight for flights departing: ANC (Anchorage)
+class AverFreightANCAirport(ListView):
+    context_object_name = "airport_list"
+    queryset = MarketData.objects.values('dest_iata_code','dest_city_name') \
+                                 .annotate(total_Pass=Avg('freight')) \
+                                 .filter(dest_iata_code='ANC') \
+                                 .order_by('-total_Pass')
+    template_name="AverFreightANCAirport.html"
+
+ # Find the average volume of freight for flights departing: SDF (Louisville)
+class AverFreightSDFAirport(ListView):
+    context_object_name = "airport_list"
+    queryset = MarketData.objects.values('dest_iata_code','dest_city_name') \
+                                 .annotate(total_Pass=Avg('freight')) \
+                                 .filter(dest_iata_code='SDF') \
+                                 .order_by('-total_Pass')
+    template_name="AverFreightSDFAirport.html"

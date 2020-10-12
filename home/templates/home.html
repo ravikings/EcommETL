@@ -87,9 +87,9 @@
           >
         </li>
         <li><a href=" {% url 'MostFreightByMonth' %} "> Which airline reported the most freight carried?</a></li>
-        <li>Which airline reported the most passengers carried?</li>
-        <li>Which airline reported the most mail carried?</li>
-        <li>Which airline reported the longest flight distance?</li>
+        <li><a href=" {% url 'MostPassengersCarried' %} ">Which airline reported the most passengers carried?</a></li>
+        <li><a href=" {% url 'MostMailCarried' %} ">Which airline reported the most mail carried? </a></li>
+        <li><a href=" {% url 'LongestDistance' %} ">Which airline reported the longest flight distance?</a></li>
 
         {% comment %} * Rank order passengers carried, by month, for these
         airlines: * AA (American Airlines) * AS (Alaska Airlines) * DL (Delta
@@ -111,11 +111,11 @@
         <li>
           Find the average number of passengers for flights into:
           <ul>
-            <li>LAX (Los Angeles)</li>
-            <li>SFO (San Francisco)</li>
-            <li>DFW (Dallas-Fort Worth)</li>
-            <li>ATL (Atlanta)</li>
-            <li>ORD (Chicago)</li>
+            <li><a href=" {% url 'AverPassengerslAXAirport' %} "> LAX (Los Angeles)</a></li>
+            <li><a href=" {% url 'AverPassengersSFOAirport' %} "> SFO (San Francisco)</a></li>
+            <li><a href=" {% url 'AverPassengersDFWAirport' %} ">DFW (Dallas-Fort Worth)</a></li>
+            <li><a href=" {% url 'AverPassengersATLAirport' %} ">ATL (Atlanta)</a></li>
+            <li><a href=" {% url 'AverPassengersORDAirport' %} ">ORD (Chicago)</a> </li>
           </ul>
         </li>
 
@@ -125,11 +125,11 @@
         <li>
           Find the average volume of freight for flights departing:
           <ul>
-            <li>MIA (Miami)</li>
-            <li>MEM (Memphis)</li>
-            <li>JFK (New York JFK)</li>
-            <li>ANC (Anchorage)</li>
-            <li>SDF (Louisville)</li>
+            <li><a href=" {% url 'AverfreightMIAAirport' %} ">MIA (Miami)</a></li>
+            <li><a href=" {% url 'AverFreightMEMAirport' %} ">MEM (Memphis)</a></li>
+            <li><a href=" {% url 'AverFreightJFKAirport' %} ">JFK (New York JFK)</a></li>
+            <li><a href=" {% url 'AverFreightANCAirport' %} ">ANC (Anchorage)</a></li>
+            <li><a href=" {% url 'AverFreightSDFAirport' %} ">SDF (Louisville)</a></li>
           </ul>
         </li>
         {% comment %} * What city pairs represent the most freight carried for
