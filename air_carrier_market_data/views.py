@@ -1,7 +1,7 @@
 # Create your views here.
 import pdb
 from django.views.generic import ListView
-from django.db.models import Avg, Max, Sum
+from django.db.models import Avg, Max, Min, Sum
 
 from . models import MarketData
 
@@ -355,3 +355,23 @@ class AverFreightSDFAirport(ListView):
                                  .filter(dest_iata_code='SDF') \
                                  .order_by('-total_Pass')
     template_name="AverFreightSDFAirport.html"
+
+# 	What city pairs represent the most freight carried for the longest distance?
+class MaxFreight(ListView):
+    context_object_name = "airport_list"
+    queryset = MarketData.objects.values('dest_iata_code','dest_city_name') \
+                                 .annotate(total_Pass=Max('freight')) \
+                                 .order_by('-total_Pass')[0:1]
+    template_name="MaxFreight.html"
+
+# What city pairs represent the most mail carried for the shortest distance?
+class MinFreight(ListView):
+    context_object_name = "airport_list"
+    queryset = MarketData.objects.values('dest_iata_code','dest_city_name') \
+                                 .annotate(total_Pass=Min('freight')) \
+                                 .order_by('-total_Pass')[0:1]
+    template_name="MinFreight.html"
+
+
+
+

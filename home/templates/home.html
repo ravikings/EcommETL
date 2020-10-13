@@ -135,12 +135,12 @@
         {% comment %} * What city pairs represent the most freight carried for
         the longest distance? * What city pairs represent the most mail carried
         for the shortest distance? {% endcomment %}
-        <li>
+        <li><a href=" {% url 'MaxFreight' %} ">
           What city pairs represent the most freight carried for the longest
-          distance?
+          distance?</a>
         </li>
-        <li>
-          What city pairs represent the most mail carried for the shortest
+        <li><a href=" {% url 'MinFreight' %} ">
+          What city pairs represent the most mail carried for the shortest</a>
           distance?
         </li>
       </ul>

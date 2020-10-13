@@ -24,7 +24,9 @@ from . views import MarketDataList, \
     AverFreightMEMAirport, \
     AverFreightJFKAirport, \
     AverFreightANCAirport, \
-    AverFreightSDFAirport
+    AverFreightSDFAirport, \
+    MaxFreight, \
+    MinFreight
 
     
 
@@ -192,8 +194,19 @@ urlpatterns = [
          ),
          name="AverFreightSDFAirport"),
 
+# 	What city pairs represent the most freight carried for the longest distance?
+ path('MaxFreight/',
+         MaxFreight.as_view(
+             extra_context={'title': "City representing the most freight carried for the longest distance"}
+         ),
+         name="MaxFreight"),
 
-
+# What city pairs represent the most mail carried for the shortest distance?
+ path('MinFreight/',
+         MinFreight.as_view(
+             extra_context={'title': "City representing the most freight carried for the Shortest distance"}
+         ),
+         name="MinFreight"),
 
     path('topdistance_month/',
          TopDistanceByMonth.as_view(
